@@ -15,7 +15,6 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Link href="/game/game-board" style={{color: 'green'}}> Game</Link>
       <Button
       onPress={() => console.log('Button pressed')}
       title="Play"
