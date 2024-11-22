@@ -6,8 +6,11 @@ const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
         justifyContent: 'center',
+        width: 200,
+        height: 50,
         paddingVertical: 12,
         paddingHorizontal: 32,
+        marginBottom: 8.5,
         borderRadius: 4,
         elevation: 3,
         backgroundColor: 'black',
