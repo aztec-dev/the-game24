@@ -1,5 +1,3 @@
-import { Pressable, StyleSheet } from "react-native";
-import {Link} from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Button from "./menu/Button";
 
@@ -18,6 +16,24 @@ export default function Index() {
       <Button
       onPress={() => console.log('Button pressed')}
       title="Play"
+      href="/game/game-board"
+      ></Button>
+
+      <Button
+      onPress={() => console.log('Button pressed')}
+      title="How to play"
+      href="/game/game-board"
+      ></Button>
+
+      <Button
+      onPress={() => console.log('Button pressed')}
+      title="Settings"
+      href="/game/game-board"
+      ></Button>
+
+      <Button
+      onPress={() => console.log('Button pressed')}
+      title="Credits"
       href="/game/game-board"
       ></Button>
     </SafeAreaView>
