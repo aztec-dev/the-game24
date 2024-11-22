@@ -19,6 +19,15 @@ const styles = StyleSheet.create({
     },
 })
 
+/*
+Comment: Implement game state:
+        - Start
+        - Pause
+        - Resume
+Pause and Resume could be in a different react component. 
+*/
+
+// Ignore error, it's an 'Any type error'
 export default function Button(props) {
     const { onPress, title = 'Play', href = 'Button'} = props;
     return (
