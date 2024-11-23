@@ -31,7 +31,7 @@ Pause and Resume could be in a different react component.
 */
 
 // Ignore error, it's an 'Any type error'
-export default function Button(props) {
+export default function Button(props: any) {
     const { onPress, title = 'Play', href } = props;
     return (
         <Link href={href} asChild>
