@@ -1,6 +1,7 @@
 import { Component, useState } from "react";
-import { Text, View, StyleSheet, Linking, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, Linking, TouchableOpacity, Dimensions } from "react-native";
 import {Link} from 'expo-router';
+import { Int32 } from "react-native/Libraries/Types/CodegenTypes";
 
 const styles = StyleSheet.create({
   center: {
@@ -13,6 +14,7 @@ const styles = StyleSheet.create({
   },
   row : {
     flexDirection: 'row',
+    backgroundColor: "cyan"
   },
   button: {
     alignItems: 'center',
@@ -23,190 +25,65 @@ const styles = StyleSheet.create({
   }
 });
 
-class Game extends Component {
-  state = { 
-    playerX: 4, 
-    playerY: 4,
-  };
-  
+function board (props: any) {
+  const {game} = props;
+  var rows = [];
+  for (let y = -3; y <= 3; y++) {
+    var buttons = [];
+    for (let x = -3; x <= 3; x++) {
+      buttons.push(
+        <TouchableOpacity style={styles.button} onPress={
+          function* fn<T>(input: T): Generator<Function> { 
+            game.onPress(x, y);
+          }
+        }>
+          <Text style={styles.container}> + </Text>
+        </TouchableOpacity>
+      )
+    }
+    rows.push(
+      <View style={styles.row}>
+        {buttons}
+      </View>
+    )
+  }
+  return (
+    <View
+      style = {[
+        styles.center,
+        {flex: 1},
+        {justifyContent: "center"},
+      ]} // or just '{styles.container}'
+    >
+      {rows}
+      <Text>Hopefully this works!</Text>
+    </View>
+  )
+}
 
-  onPress = () => {
-    // 
+class Game extends Component {
+  playerCoords = { // displacement from center (4, 4)
+    X: 0,
+    Y: 0,
+  };
+  pressedCoords = { // displacement from center (4, 4)
+    X: 0,
+    Y: 0,
+  };
+
+  onPress = (x: Int32, y: Int32) => {
+    console.log('X: ' + x, '\n Y: ', y);
   };
 
   render() {
     return (
-      <View
-        style = {[
-          styles.center,
-          {flex: 1},
-          {justifyContent: "center"}
-        ]} // or just '{styles.container}'
-      >
-        
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
+      <View>
+        <View style={{height: Dimensions.get('window').height / 2, backgroundColor: 'black'}}>
+          {board(this)}
         </View>
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
+        <View style={{height: Dimensions.get('window').height / 2, backgroundColor: 'grey'}}>
+          <Text></Text>
         </View>
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> P </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-        </View>
-
-        <Text>Hopefully this works!</Text>
       </View>
     );
   }
