@@ -30,7 +30,6 @@ Comment: Implement game state:
 Pause and Resume could be in a different react component. 
 */
 
-// Ignore error, it's an 'Any type error'
 export default function Button(props: any) {
     const { onPress, title = 'Play', href } = props;
     return (

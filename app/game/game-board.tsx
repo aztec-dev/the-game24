@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Linking, TouchableOpacity, Dimensions } from "r
 import {Link} from 'expo-router';
 import { Int32 } from "react-native/Libraries/Types/CodegenTypes";
 import board from "./board";
+import CardButton from "./CardButton";
 
 const styles = StyleSheet.create({
   center: {
@@ -44,8 +45,26 @@ class Game extends Component {
         <View style={{height: Dimensions.get('window').height * 0.55, backgroundColor: 'black'}}>
           {board(this)}
         </View>
+
         <View style={{height: Dimensions.get('window').height * 0.45, backgroundColor: 'grey'}}>
-          <Text></Text>
+          <View style={{ 
+                flexDirection:"row", 
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: 32,
+            }}>
+            <CardButton
+              onPress={() => this.gameState[3][3] = 'P'}
+              Source = {require("../images/react-logo.png")}
+            ></CardButton>
+            <CardButton
+              onPress={() => this.gameState[3][3] = 'P'}
+            ></CardButton>
+            <CardButton
+              onPress={() => this.gameState[3][3] = 'P'}
+              Source = {require("../images/favicon.png")}
+            ></CardButton>
+          </View>
         </View>
       </View>
     );
