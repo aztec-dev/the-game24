@@ -27,14 +27,10 @@ const styles = StyleSheet.create({
 });
 
 class Game extends Component {
-  playerCoords = { // displacement from center (4, 4)
-    X: 0,
-    Y: 0,
-  };
-  pressedCoords = { // displacement from center (4, 4)
-    X: 0,
-    Y: 0,
-  };
+  public gameState = new Array(7).fill(new Array(7).fill('+'));
+   // coordinates are displacement from center (4, 4)
+  playerCoords  = { X: 0, Y: 0};
+  pressedCoords = { X: 0, Y: 0};
 
   onPress = (x: Int32, y: Int32) => {
     console.log('X: ' + x, '\n Y: ' + y);
@@ -45,10 +41,10 @@ class Game extends Component {
   render() {
     return (
       <View>
-        <View style={{height: Dimensions.get('window').height / 2, backgroundColor: 'black'}}>
+        <View style={{height: Dimensions.get('window').height * 0.55, backgroundColor: 'black'}}>
           {board(this)}
         </View>
-        <View style={{height: Dimensions.get('window').height / 2, backgroundColor: 'grey'}}>
+        <View style={{height: Dimensions.get('window').height * 0.45, backgroundColor: 'grey'}}>
           <Text></Text>
         </View>
       </View>
