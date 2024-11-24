@@ -22,19 +22,19 @@ export default function Index() {
       <Button
       onPress={() => console.log('Button pressed')}
       title="How to play"
-      href="/game/game-board"
+      href="/how-to-play/guide"
       ></Button>
 
       <Button
       onPress={() => console.log('Button pressed')}
       title="Settings"
-      href="/game/game-board"
+      href="/settings/settings"
       ></Button>
 
       <Button
       onPress={() => console.log('Button pressed')}
       title="Credits"
-      href="/game/game-board"
+      href="./credits"
       ></Button>
     </SafeAreaView>
   );
