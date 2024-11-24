@@ -2,6 +2,7 @@ import { Component, useState } from "react";
 import { Text, View, StyleSheet, Linking, TouchableOpacity, Dimensions } from "react-native";
 import {Link} from 'expo-router';
 import { Int32 } from "react-native/Libraries/Types/CodegenTypes";
+import board from "./board";
 
 const styles = StyleSheet.create({
   center: {
@@ -25,42 +26,6 @@ const styles = StyleSheet.create({
   }
 });
 
-function board (props: any) {
-  const {game} = props;
-  var rows = [];
-  for (let y = -3; y <= 3; y++) {
-    var buttons = [];
-    for (let x = -3; x <= 3; x++) {
-      buttons.push(
-        <TouchableOpacity style={styles.button} onPress={
-          function* fn<T>(input: T): Generator<Function> { 
-            game.onPress(x, y);
-          }
-        }>
-          <Text style={styles.container}> + </Text>
-        </TouchableOpacity>
-      )
-    }
-    rows.push(
-      <View style={styles.row}>
-        {buttons}
-      </View>
-    )
-  }
-  return (
-    <View
-      style = {[
-        styles.center,
-        {flex: 1},
-        {justifyContent: "center"},
-      ]} // or just '{styles.container}'
-    >
-      {rows}
-      <Text>Hopefully this works!</Text>
-    </View>
-  )
-}
-
 class Game extends Component {
   playerCoords = { // displacement from center (4, 4)
     X: 0,
@@ -72,7 +37,9 @@ class Game extends Component {
   };
 
   onPress = (x: Int32, y: Int32) => {
-    console.log('X: ' + x, '\n Y: ', y);
+    console.log('X: ' + x, '\n Y: ' + y);
+    this.pressedCoords.X = x;
+    this.pressedCoords.Y = y;
   };
 
   render() {
