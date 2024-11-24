@@ -39,6 +39,11 @@ class Game extends Component {
     this.pressedCoords.Y = y;
   };
 
+  movePlayer(x: Int32, y: Int32) {
+    this.gameState[this.playerCoords.X + 3][this.playerCoords.Y + 3] = '+';
+    this.gameState[x + 3][y + 3] = 'P';
+  }
+
   render() {
     return (
       <View>
@@ -54,14 +59,14 @@ class Game extends Component {
                 marginTop: 32,
             }}>
             <CardButton
-              onPress={() => this.gameState[3][3] = 'P'}
+              onPress={() => console.log("It works?")}
               Source = {require("../images/react-logo.png")}
             ></CardButton>
             <CardButton
-              onPress={() => this.gameState[3][3] = 'P'}
+              onPress={() => this.gameState[3][3] = console.log("It doesn't work?")}
             ></CardButton>
             <CardButton
-              onPress={() => this.gameState[3][3] = 'P'}
+              onPress={() => this.gameState[1][1] = '-'}
               Source = {require("../images/favicon.png")}
             ></CardButton>
           </View>

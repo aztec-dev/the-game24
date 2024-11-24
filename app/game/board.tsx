@@ -34,7 +34,7 @@ export default function board (props: Game) {
         buttons.push(
             <TouchableOpacity style={styles.button} onPress={
                 function* fn<T>(input: T): Generator<Function> { 
-                    game.onPress(x, y);
+                    game.movePlayer(x, y);
                 }}>
                 <Text style={styles.container}> {
                     game.gameState[x+3][y+3]
