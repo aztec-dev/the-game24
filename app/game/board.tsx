@@ -32,7 +32,10 @@ export default function board (props: Game) {
       var buttons = [];
       for (let x = -3; x <= 3; x++) {
         buttons.push(
-            <TouchableOpacity style={styles.button} onPress={
+            <TouchableOpacity
+                key={x+10*y}
+                style={styles.button} 
+                onPress={
                 function* fn<T>(input: T): Generator<Function> { 
                     game.movePlayer(x, y);
                 }}>
@@ -43,7 +46,7 @@ export default function board (props: Game) {
         )
       }
       rows.push(
-        <View style={styles.row}>
+        <View style={styles.row} key={y}>
           {buttons}
         </View>
       )
