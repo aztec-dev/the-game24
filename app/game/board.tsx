@@ -1,7 +1,7 @@
 import { Component, useState } from "react";
 import { Text, View, StyleSheet, Linking, TouchableOpacity, Dimensions } from "react-native";
 import {Link} from 'expo-router';
-//import tile from "./tile";
+import Game from "./game-board";
 
 const styles = StyleSheet.create({
     center: {
@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       backgroundColor: '#FFFFFF',
       padding: 5,
-      height: 30,
-      width: 30,
+      height: 40,
+      width: 40,
     },
     row : {
       flexDirection: 'row',
@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
     }
   });
 
-export default function board (props: any) {
-    const {game} = props;
+export default function board (props: Game) {
+    const game = props;
     var rows = [];
     for (let y = -3; y <= 3; y++) {
       var buttons = [];
@@ -36,7 +36,9 @@ export default function board (props: any) {
                 function* fn<T>(input: T): Generator<Function> { 
                     game.onPress(x, y);
                 }}>
-                <Text style={styles.container}> + </Text>
+                <Text style={styles.container}> {
+                    game.gameState[x+3][y+3]
+                } </Text>
             </TouchableOpacity>
         )
       }
