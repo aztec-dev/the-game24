@@ -16,6 +16,10 @@ const styles = StyleSheet.create({
         elevation: 3,
         backgroundColor: 'black',
     },
+    image: {
+        width:48,
+        height: 48
+    },
     text: {
         fontSize: 16,
         lineHeight: 21,
@@ -27,7 +31,7 @@ export default function CardButton(props: any) {
     const { onPress, name = 'Card', Source = require("../images/icon.png") } = props;
     return (
         <Pressable style={styles.button} onPress={onPress}>
-            <Image style= {{width:48, height: 48}} source={Source}/>
+            <Image style= {styles.image} source={Source}/>
             <Text style={styles.text}>{name}</Text>
         </Pressable>
     )
