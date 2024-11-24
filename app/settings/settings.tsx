@@ -32,10 +32,10 @@ const settings = () => {
                     flexDirection:"row", 
                     alignItems: 'center',
                     justifyContent: 'center'}}>
-                    <Text> Music? </Text>
+                    <Text> Music </Text>
                     <Switch
                         trackColor={{false: '#767577', true: '#81b0ff'}}
-                        thumbColor={isMusicEnabled ? '#f5dd4b' : '#f4f3f4'}
+                        thumbColor={isMusicEnabled ? '#52a447' : '#f4f3f4'}
                         ios_backgroundColor="#3e3e3e"
                         onValueChange={toggleSwitchMusic}
                         value={isMusicEnabled}
@@ -50,7 +50,7 @@ const settings = () => {
                     </Text>
                     <Switch
                         trackColor={{false: '#767577', true: '#81b0ff'}}
-                        thumbColor={isDarkModeEnabled ? '#f5dd4b' : '#f4f3f4'}
+                        thumbColor={isDarkModeEnabled ? '#52a447' : '#f4f3f4'}
                         ios_backgroundColor="#3e3e3e"
                         onValueChange={toggleSwitchDarkMode}
                         value={isDarkModeEnabled}
@@ -65,10 +65,10 @@ const settings = () => {
                     </Text>
                     <Switch
                         trackColor={{false: '#767577', true: '#81b0ff'}}
-                        thumbColor={isVibrationEnabled ? '#f5dd4b' : '#f4f3f4'}
+                        thumbColor={isVibrationEnabled ? '#52a447' : '#f4f3f4'}
                         ios_backgroundColor="#3e3e3e"
-                        onValueChange={toggleSwitchDarkMode}
-                        value={isDarkModeEnabled}
+                        onValueChange={toggleSwitchVibration}
+                        value={isVibrationEnabled}
                     />
                 </View>
                 <View style={{
