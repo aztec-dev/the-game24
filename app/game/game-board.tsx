@@ -1,4 +1,4 @@
-import { Component, useState } from "react";
+import { Component, ReactNode, useState } from "react";
 import { Text, View, StyleSheet, Linking, TouchableOpacity } from "react-native";
 import {Link} from 'expo-router';
 
@@ -25,190 +25,49 @@ const styles = StyleSheet.create({
 
 class Game extends Component {
   state = { 
-    playerX: 4, 
-    playerY: 4,
+    playerX: 3,  // changed to center P
+    playerY: 3,  // changed to center p
   };
   
 
-  onPress = () => {
-    // 
+  onPress = (rowIndex, colIndex) => {
+    this.setState({
+      playerX: colIndex,
+      playerY: rowIndex,
+    })
   };
 
-  render() {
-    return (
-      <View
-        style = {[
-          styles.center,
-          {flex: 1},
-          {justifyContent: "center"}
-        ]} // or just '{styles.container}'
-      >
-        
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> P </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={styles.container}> + </Text>
-          </TouchableOpacity>
-        </View>
+  renderRow = (rowIndex) => {
+    const buttons = [];
+    for (let colIndex = 0; colIndex < 7; colIndex++) {
+      buttons.push(
+        <TouchableOpacity
+          key={`button-${rowIndex}+${colIndex}`}
+          style={styles.button}
+          onPress={() => this.onPress(rowIndex, colIndex)}
+          >
+        <Text>
+          {this.state.playerX == colIndex && this.state.playerY === rowIndex ? 'P' : '+'}
+        </Text>            
+        </TouchableOpacity>
+      );
 
-        <Text>Hopefully this works!</Text>
+    }
+    
+    return <View key={`row-${rowIndex}`} style={styles.row}>{buttons}</View>;
+  }
+
+  render(): ReactNode {
+    const rows = [];
+    for (let rowIndex = 0; rowIndex < 7; rowIndex++) {
+      rows.push(this.renderRow(rowIndex));
+    }
+    return (
+      <View style={styles.container}>
+        {rows}
+        <Text>Hopefully this works</Text>
       </View>
-    );
+    )
   }
 }
 
