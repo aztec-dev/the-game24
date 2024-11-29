@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, StyleSheet, Pressable } from 'react-native';
-import { Link } from "expo-router";
+import { ExternalPathString, Link, RelativePathString } from "expo-router";
 
 const styles = StyleSheet.create({
     button: {
@@ -30,13 +30,18 @@ Comment: Implement game state:
 Pause and Resume could be in a different react component. 
 */
 
+type buttonProps = {
+    onPress: null,
+    title: string,
+    href: object,
+}
+
 // Ignore error, it's an 'Any type error'
-export default function Button(props) {
-    const { onPress, title = 'Play', href } = props;
+export default function Button(props: buttonProps) {
     return (
-        <Link href={href} asChild>
-            <Pressable style={styles.button} onPress={onPress}>
-                <Text style={styles.text}>{title}</Text>
+        <Link href={props.href} asChild>
+            <Pressable style={styles.button} onPress={props.onPress}>
+                <Text style={styles.text}>{props.title}</Text>
             </Pressable>
         </Link>
     )
