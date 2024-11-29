@@ -36,8 +36,8 @@ type buttonProps = {
     href: object,
 }
 
-// Ignore error, it's an 'Any type error'
-export default function Button(props: buttonProps) {
+export default function Button(props: any) {
+    const { onPress, title = 'Play', href } = props;
     return (
         <Link href={props.href} asChild>
             <Pressable style={styles.button} onPress={props.onPress}>

@@ -1,6 +1,9 @@
 import { Stack } from "expo-router";
 import Game from "./game/game-board";
 
+// Explanation for headers: 
+//   https://stackoverflow.com/questions/75823714/react-native-expo-router-hiding-the-stack-header-on-home-screen
+
 export default function RootLayout() {
   return <Stack
   screenOptions={{

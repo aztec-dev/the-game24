@@ -1,6 +1,9 @@
-import { Component, ReactNode, useState } from "react";
-import { Text, View, StyleSheet, Linking, TouchableOpacity } from "react-native";
+import { Component, useState } from "react";
+import { Text, View, StyleSheet, Linking, TouchableOpacity, Dimensions } from "react-native";
 import {Link} from 'expo-router';
+import { Int32 } from "react-native/Libraries/Types/CodegenTypes";
+import board from "./board";
+import CardButton from "./CardButton";
 
 const styles = StyleSheet.create({
   center: {
@@ -13,6 +16,7 @@ const styles = StyleSheet.create({
   },
   row : {
     flexDirection: 'row',
+    backgroundColor: "cyan"
   },
   button: {
     alignItems: 'center',
@@ -24,48 +28,49 @@ const styles = StyleSheet.create({
 });
 
 class Game extends Component {
-  state = { 
-    playerX: 3,  // changed to center P
-    playerY: 3,  // changed to center p
-  };
-  
+  public gameState = new Array(7).fill(new Array(7).fill('+'));
+   // coordinates are displacement from center (4, 4)
+  playerCoords  = { X: 0, Y: 0};
+  pressedCoords = { X: 0, Y: 0};
 
-  onPress = (rowIndex, colIndex) => {
-    this.setState({
-      playerX: colIndex,
-      playerY: rowIndex,
-    })
+  onPress = (x: Int32, y: Int32) => {
+    console.log('X: ' + x, '\n Y: ' + y);
+    this.pressedCoords.X = x;
+    this.pressedCoords.Y = y;
   };
 
-  renderRow = (rowIndex) => {
-    const buttons = [];
-    for (let colIndex = 0; colIndex < 7; colIndex++) {
-      buttons.push(
-        <TouchableOpacity
-          key={`button-${rowIndex}+${colIndex}`}
-          style={styles.button}
-          onPress={() => this.onPress(rowIndex, colIndex)}
-          >
-        <Text>
-          {this.state.playerX == colIndex && this.state.playerY === rowIndex ? 'P' : '+'}
-        </Text>            
-        </TouchableOpacity>
-      );
-
-    }
-    
-    return <View key={`row-${rowIndex}`} style={styles.row}>{buttons}</View>;
+  movePlayer(x: Int32, y: Int32) {
+    this.gameState[this.playerCoords.X + 3][this.playerCoords.Y + 3] = '+';
+    this.gameState[x + 3][y + 3] = 'P';
   }
 
-  render(): ReactNode {
-    const rows = [];
-    for (let rowIndex = 0; rowIndex < 7; rowIndex++) {
-      rows.push(this.renderRow(rowIndex));
-    }
+  render() {
     return (
-      <View style={styles.container}>
-        {rows}
-        <Text>Hopefully this works</Text>
+      <View>
+        <View style={{height: Dimensions.get('window').height * 0.55, backgroundColor: 'black'}}>
+          {board(this)}
+        </View>
+
+        <View style={{height: Dimensions.get('window').height * 0.45, backgroundColor: 'grey'}}>
+          <View style={{ 
+                flexDirection:"row", 
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: 32,
+            }}>
+            <CardButton
+              onPress={() => console.log("It works?")}
+              Source = {require("../images/react-logo.png")}
+            ></CardButton>
+            <CardButton
+              onPress={() => this.gameState[3][3] = console.log("It doesn't work?")}
+            ></CardButton>
+            <CardButton
+              onPress={() => this.gameState[1][1] = '-'}
+              Source = {require("../images/favicon.png")}
+            ></CardButton>
+          </View>
+        </View>
       </View>
     )
   }
