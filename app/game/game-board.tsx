@@ -1,76 +1,122 @@
-import { Component, useState } from "react";
+import { Component, ReactNode, useState } from "react";
 import { Text, View, StyleSheet, Linking, TouchableOpacity, Dimensions } from "react-native";
-import {Link} from 'expo-router';
-import { Int32 } from "react-native/Libraries/Types/CodegenTypes";
-import board from "./board";
 import CardButton from "./CardButton";
+import Tile from "./Tile";
 
 const styles = StyleSheet.create({
-  center: {
-    alignItems: 'center',
-  },
-  container: {
-    flex: 1,
+  top : {
+    height: Dimensions.get('window').height * 0.55,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'black'
+  },
+  bottom : {
+    height: Dimensions.get('window').height * 0.45,
+    backgroundColor: 'grey'
+  },
+  hand : {
+    flexDirection:"row",
+    justifyContent: 'center',
+    marginTop: 32,
   },
   row : {
     flexDirection: 'row',
-    backgroundColor: "cyan"
   },
   button: {
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
-    padding: 5,
+    padding: 2,
     height: 30,
     width: 30,
   }
 });
 
-class Game extends Component {
-  public gameState = new Array(7).fill(new Array(7).fill('+'));
-   // coordinates are displacement from center (4, 4)
-  playerCoords  = { X: 0, Y: 0};
-  pressedCoords = { X: 0, Y: 0};
+interface BoardState {
+  tiles: Array<Array<Tile>>,
+  playerX: number,
+  playerY: number
+}
 
-  onPress = (x: Int32, y: Int32) => {
-    console.log('X: ' + x, '\n Y: ' + y);
-    this.pressedCoords.X = x;
-    this.pressedCoords.Y = y;
+class Game extends Component<{}, BoardState> {
+  
+  constructor(props: {}) {
+    super(props);
+
+    const _tiles: Array<Array<Tile>> = [];
+    for (let rowIndex = 0; rowIndex < 7; rowIndex++) {
+      const row: Array<Tile> = [];
+      for (let colIndex = 0; colIndex < 7; colIndex++) {
+        row.push(
+          new Tile({})
+        )
+      }
+      _tiles.push(row)
+    }
+
+    this.state = {
+      playerX: 3,
+      playerY: 3,
+      tiles: _tiles
+    };
+}
+
+  onPress = (rowIndex: number, colIndex: number) => {
+    this.setState({
+        playerX: colIndex,
+        playerY: rowIndex
+    })
   };
 
-  movePlayer(x: Int32, y: Int32) {
-    this.gameState[this.playerCoords.X + 3][this.playerCoords.Y + 3] = '+';
-    this.gameState[x + 3][y + 3] = 'P';
+  renderRow = (rowIndex: number) => {
+    const row = [];
+    for (let colIndex = 0; colIndex < 7; colIndex++) {
+      row.push(
+        <TouchableOpacity
+          key={`button-${rowIndex}+${colIndex}`}
+          style={styles.button}
+          onPress={() => this.onPress(rowIndex, colIndex)}
+          >
+        <Text>
+          {this.state.playerX == colIndex && this.state.playerY == rowIndex ? 'P' : this.state.tiles[rowIndex][colIndex].getText()}
+        </Text>
+        </TouchableOpacity>
+      );
+
+    }
+    
+    return <View key={`row-${rowIndex}`} style={styles.row}>{row}</View>;
   }
 
-  render() {
+  render(): ReactNode {
+    const rows = [];
+    for (let rowIndex = 0; rowIndex < 7; rowIndex++) {
+      rows.push(this.renderRow(rowIndex));
+    }
     return (
       <View>
-        <View style={{height: Dimensions.get('window').height * 0.55, backgroundColor: 'black'}}>
-          {board(this)}
+
+        <View style={styles.top}>
+          {rows}
         </View>
 
-        <View style={{height: Dimensions.get('window').height * 0.45, backgroundColor: 'grey'}}>
-          <View style={{ 
-                flexDirection:"row", 
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginTop: 32,
-            }}>
+        <View style={styles.bottom}>
+          <View style={styles.hand}>
+
             <CardButton
-              onPress={() => console.log("It works?")}
+              onPress={() => console.log("Card 1 selected")}
               Source = {require("../images/react-logo.png")}
-            ></CardButton>
+            />
             <CardButton
-              onPress={() => this.gameState[3][3] = console.log("It doesn't work?")}
-            ></CardButton>
+              onPress={() => console.log("Card 2 selected")}
+            />
             <CardButton
-              onPress={() => this.gameState[1][1] = '-'}
+              onPress={() => console.log("Card 3 selected")}
               Source = {require("../images/favicon.png")}
-            ></CardButton>
+            />
+
           </View>
         </View>
+
       </View>
     )
   }

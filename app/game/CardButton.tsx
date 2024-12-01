@@ -1,6 +1,5 @@
 import React from "react";
 import { Text, StyleSheet, Pressable, Image } from 'react-native';
-import { Link } from "expo-router";
 
 const styles = StyleSheet.create({
     button: {
