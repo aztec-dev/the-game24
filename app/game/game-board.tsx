@@ -2,6 +2,8 @@ import { Component, ReactNode, useState } from "react";
 import { Text, View, StyleSheet, Linking, TouchableOpacity, Dimensions } from "react-native";
 import CardButton from "./CardButton";
 import Tile from "./Tile";
+import Entity from "./Entity";
+import Player from "./Player";
 
 const styles = StyleSheet.create({
   top : {
@@ -33,8 +35,8 @@ const styles = StyleSheet.create({
 
 interface BoardState {
   tiles: Array<Array<Tile>>,
-  playerX: number,
-  playerY: number
+  entities: Array<Entity>,
+  player: Player
 }
 
 class Game extends Component<{}, BoardState> {
@@ -54,17 +56,23 @@ class Game extends Component<{}, BoardState> {
     }
 
     this.state = {
-      playerX: 3,
-      playerY: 3,
+      player: new Player(3, 3),
+      entities: [],
       tiles: _tiles
     };
-}
+  }
 
-  onPress = (rowIndex: number, colIndex: number) => {
-    this.setState({
-        playerX: colIndex,
-        playerY: rowIndex
-    })
+  isBlocked(y: number, x: number): boolean {
+    return this.state.entities.filter(
+      (entity) => {entity.X == x && entity.X == y}
+    ).length > 0;
+  }
+
+  onPress(rowIndex: number, colIndex: number) {
+    //this.state.player.setPosition(rowIndex, colIndex)
+    const { player } = this.state;
+    player.move(colIndex, rowIndex);
+    this.setState({ player });
   };
 
   renderRow = (rowIndex: number) => {
@@ -77,7 +85,9 @@ class Game extends Component<{}, BoardState> {
           onPress={() => this.onPress(rowIndex, colIndex)}
           >
         <Text>
-          {this.state.playerX == colIndex && this.state.playerY == rowIndex ? 'P' : this.state.tiles[rowIndex][colIndex].getText()}
+          {this.state.player.X == colIndex && this.state.player.Y == rowIndex ?
+              'P' : this.state.tiles[rowIndex][colIndex].getText()
+          }
         </Text>
         </TouchableOpacity>
       );
